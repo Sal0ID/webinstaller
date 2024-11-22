@@ -5,9 +5,9 @@ This library will continue download even if connection drops.
 - ## [Simplest use](https://github.com/Sal0ID/webinstaller#simplest-use-1)
 - ## [Advanced usage](https://github.com/Sal0ID/webinstaller/blob/main/README.md#advanced-usage-1)
   - [Specify destination](https://github.com/Sal0ID/webinstaller/blob/main/README.md#specify-destination)
-  - CLI use
-  - Launch file after download
-  - Add shortcut to startup folder
+  - [CLI use](https://github.com/Sal0ID/webinstaller/blob/main/README.md#cli-usage)
+  - [Launch file after download](https://github.com/Sal0ID/webinstaller/blob/main/README.md#launch-file-after-download)
+  - [Add shortcut to startup folder](https://github.com/Sal0ID/webinstaller/blob/main/README.md#add-shortcut-to-startup-folder)
  
 # Installation
 1. Upload some random file to google drive right click it Share->Share->Set general access to anyone with the link
