@@ -41,3 +41,39 @@ destination = "amogus"
 webinstaller.download_file_from_google_drive(drive_url, destination = destination) #Will create amogus folder and download file there
 ```
 ## CLI usage
+1. Create .py file with following content:
+```
+from webinstaller import webinstaller
+
+webinstaller.parse_command_line_args()
+```
+2. Create executable file via pyinstaller
+```
+pyinstaller --noconfirm --onefile --windowed  "path_to_your_py_file"
+```
+3. You are ready to go, now you can pass following arguments to .exe file:
+   - URL to the google drive file (mandatory positional argument)
+   - --destination (-d) Destination where to save downloaded file/archive (optional)
+   - --launch (-l) Specify the file name for the file that you want to launch after your program is downloaded (optional) ; relative path from destination folder
+   - --startup (-s) Specify file name to which shortcut will be created in windows startup directory (optional).  
+## **Example:**
+```
+main.exe https://google.com -d folder -l main.exe -s onstartup.exe
+```
+## Launch file after download
+```
+from webinstaller import webinstaller
+
+drive_url = "insert_link_from_google_drive_here"
+
+webinstaller.download_file_from_google_drive(drive_url, launch_file_after_download = "deleteme.exe") # File deleteme.exe will be lauched after download if it exists. Also you can pass other arguments
+```
+## Add shortcut to startup folder
+Program will create shortcut in C:\Users\User_Name\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup pointing to file that you specify. You can pass other arguments
+```
+from webinstaller import webinstaller
+
+drive_url = "insert_link_from_google_drive_here"
+
+webinstaller.download_file_from_google_drive(drive_url, add_shortcut_to_startup_folder = "deleteme.exe") # 
+```
