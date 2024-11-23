@@ -15,6 +15,7 @@ This library will continue download even if connection drops.
  ```
 git clone https://github.com/Sal0ID/webinstaller
 cd webinstaller
+pip install build
 py -m build
 pip install dist/webinstaller-0.2.0-py3-none-any.whl
  ```
