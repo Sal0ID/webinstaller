@@ -17,7 +17,7 @@ git clone https://github.com/Sal0ID/webinstaller
 cd webinstaller
 pip install build
 py -m build
-pip install dist/webinstaller-0.0.2-py3-none-any.whl
+pip install dist/webinstaller-0.0.3-py3-none-any.whl
  ```
 # Simplest use
 Create venv or just create python file
