@@ -56,7 +56,7 @@ def parse_command_line_args():
 
 def if_virus_scan_warning(session, destination, file_size): 
     """If google drive virus scan warning appears"""
-    print("Test dest + downloaded = ",destination + "downloaded_file")
+    
     if os.path.isfile(destination) and os.path.basename(destination).split('/')[-1] == "downloaded_file":
         with open(destination) as f: 
             s = f.read()
@@ -68,22 +68,17 @@ def if_virus_scan_warning(session, destination, file_size):
             confirm = soup.find('input', {"name" : "confirm"})['value']
             uuid = soup.find('input', {"name" : "uuid"})['value']
 
-            print(id)
-            print(export)
-            print(confirm)
-            print(uuid)
-
             if id:
                 second_response_for_download_confirmation =  session.get(USERCONTENT_URL + "?id=" + id + "&export=" + export + "&confirm=" + confirm + "&uuid=" + uuid, stream=True)
                 second_file_name = get_file_name_from_response(second_response_for_download_confirmation)
-                #print(second_response_for_download_confirmation)
+                
                 real_destination = get_directory_from_file(destination) + "\\" + second_file_name
 
                 save_response_content(second_response_for_download_confirmation, real_destination, file_size)
                 verify_download(second_response_for_download_confirmation, real_destination)
                 
             else: print("Id is none")
-        print("AMOGUS")
+        
         try:
             if os.path.exists(destination):
                 os.remove(destination)
@@ -91,7 +86,6 @@ def if_virus_scan_warning(session, destination, file_size):
             else:
                 print(f"{"downloaded_file"} does not exist.")
         except Exception as e:
-            #print(f"An error occurred: {e}")
             pass
 
         if os.path.exists(real_destination):
@@ -104,7 +98,6 @@ def download_file_from_google_drive(
 
     # Extract the file ID from the provided URL
     file_id = extract_file_id(drive_url)
-    print("Current working directory: ", os.getcwd())
 
     session = requests.Session()
 
@@ -147,7 +140,6 @@ def download_file_from_google_drive(
         directory = os.path.dirname(destination)
         os.makedirs(directory, exist_ok=True)
 
-    print("Destination = ", destination)
 
     # If the file already exists, get its size for resuming the download
     if os.path.exists(destination) and os.path.isfile(destination):
@@ -175,9 +167,11 @@ def download_file_from_google_drive(
     extracted_file = if_virus_scan_warning(session, destination, file_size)
 
     if extracted_file is None:
-        print("No additional downloaded file was detected.")
+        pass
+        # No downloaded_file was detected.
     elif extracted_file is False:
-        print("Download of second file failed.")
+        pass
+        # Download of second file failed.
     else:
         # Extract the archive if an additional file was downloaded
         extract_archive(extracted_file, destination)
@@ -206,12 +200,11 @@ def download_file_from_google_drive(
                 get_startup_folder(), f"{add_shortcut_to_startup_folder}.lnk"
             )
             create_shortcut(shortcut_path, os.path.join(os.getcwd(), add_shortcut_to_startup_folder))
-        print("Shortcut created.")
 
     # Launch the program after download if requested
     if launch_file_after_download:
         launch_program_after_install(destination, launch_file_after_download)
-        print("Program launched.")
+        
 
     # Return the final file path
     return os.path.join(destination)
@@ -278,43 +271,42 @@ def extract_archive(file_path, extract_to = None):
 
     if not os.path.isdir(extract_to):
         extract_to = get_directory_from_file(extract_to)
-    #extract_to = os.path.splitext(os.path.basename(extract_to))[0] 
-    #extract_to = None
+    
+    
     # Determine file extension
     file_ext = os.path.splitext(file_path)[-1].lower()
-    print("Extract to: ", extract_to)
+    
     if file_ext == '.zip':
         # Extract ZIP files
         with zipfile.ZipFile(file_path, 'r') as zip_ref:
-            print("Extract to2: ", extract_to)
             zip_ref.extractall(extract_to)
-        print(f"Extracted ZIP archive: {file_path}")
+            
+        #print(f"Extracted ZIP archive: {file_path}")
 
     elif file_ext == '.7z':
         # Extract 7z files
         with py7zr.SevenZipFile(file_path, mode='r') as seven_z_ref:
             seven_z_ref.extractall(path=extract_to)
-        print(f"Extracted 7z archive: {file_path}")
+        
+        #print(f"Extracted 7z archive: {file_path}")
 
     else:
-        print(f"Unsupported file type: {file_ext}")
+        #print(f"Unsupported file type: {file_ext}")
         return -1
 
 
 
 def launch_program_after_install(destination, exe_path):
-    print("Dest + exe path ", destination + exe_path)
     if not os.path.isdir(destination):
         destination = get_directory_from_file(destination)
         
 
     if os.path.isfile(destination + "\\" + exe_path):
-        print(destination + "\\" + exe_path)
         # Start the new process as a separate parent process
         process = subprocess.Popen(destination + "\\" + exe_path)
 
         # You can interact with `process` here or just let it run independently
-        print(f"Started new process with PID: {process.pid}")
+        #print(f"Started new process with PID: {process.pid}")
     
 
 
@@ -331,7 +323,7 @@ def create_shortcut(path, target):
     path = where the shortcut will be created
     target = file/directory to which the shortcut is pointing
     """
-    print("Target: ", target)
+    #print("Target: ", target)
     shell = Dispatch('WScript.Shell')
     shortcut = shell.CreateShortCut(path)
     shortcut.Targetpath = target
