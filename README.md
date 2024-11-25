@@ -12,7 +12,7 @@ A Python library designed for seamless file downloads from Google Drive, offerin
  
 # Installation
 1. Upload some random file to google drive right click it Share->Share->Set general access to anyone with the link
-2. Install library with this commands or with pip
+2. Install library with this commands or with ```pip install webinstaller```
  ```
 git clone https://github.com/Sal0ID/webinstaller
 cd webinstaller
