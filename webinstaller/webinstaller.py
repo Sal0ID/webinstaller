@@ -60,7 +60,14 @@ def if_virus_scan_warning(session, destination, file_size):
     if os.path.isfile(destination) and os.path.basename(destination).split('/')[-1] == "downloaded_file":
         with open(destination) as f: 
             s = f.read()
-            #print(s)
+            f.close()
+            if os.path.exists(destination):
+                os.remove(destination)
+                print(f"{"downloaded_file"} has been removed.")
+            else:
+                print(f"{"downloaded_file"} does not exist.")
+
+
             soup = BeautifulSoup(s, 'html.parser')
 
             id = soup.find('input', {"name" : "id"})['value']
@@ -79,14 +86,7 @@ def if_virus_scan_warning(session, destination, file_size):
                 
             else: print("Id is none")
         
-        try:
-            if os.path.exists(destination):
-                os.remove(destination)
-                print(f"{"downloaded_file"} has been removed.")
-            else:
-                print(f"{"downloaded_file"} does not exist.")
-        except Exception as e:
-            pass
+
 
         if os.path.exists(real_destination):
             return real_destination
@@ -184,7 +184,6 @@ def download_file_from_google_drive(
 
     # Add a shortcut to the startup folder if requested
     if add_shortcut_to_startup_folder:
-        print("Adding shortcut to startup folder.")
         if not os.path.isdir(destination):
             destination_dir = get_directory_from_file(destination)
         else:
@@ -306,7 +305,7 @@ def launch_program_after_install(destination, exe_path):
         process = subprocess.Popen(destination + "\\" + exe_path)
 
         # You can interact with `process` here or just let it run independently
-        #print(f"Started new process with PID: {process.pid}")
+        print(f"Started new process with PID: {process.pid}")
     
 
 
@@ -328,8 +327,3 @@ def create_shortcut(path, target):
     shortcut = shell.CreateShortCut(path)
     shortcut.Targetpath = target
     shortcut.save()
-
-
-
-
- 
