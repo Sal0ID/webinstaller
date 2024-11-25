@@ -305,7 +305,7 @@ def launch_program_after_install(destination, exe_path):
         process = subprocess.Popen(destination + "\\" + exe_path)
 
         # You can interact with `process` here or just let it run independently
-        print(f"Started new process with PID: {process.pid}")
+        #print(f"Started new process with PID: {process.pid}")
     
 
 
