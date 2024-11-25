@@ -1,5 +1,6 @@
 # Webinstaller
-This library will continue download even if connection drops.
+A Python library designed for seamless file downloads from Google Drive, offering robust features to simplify the process. It allows you to specify a custom destination folder for downloads and supports popular archive formats like .zip and .rar. The library also provides convenient options to launch downloaded files and add them to the Windows startup folder, if desired. With built-in CLI support, it ensures ease of use from the command line. Additionally, the library is resilient against connection interruptions, automatically resuming downloads once the connection is restored.
+
 # Contents
 - ## [Installation](https://github.com/Sal0ID/webinstaller#installation-1)
 - ## [Simplest use](https://github.com/Sal0ID/webinstaller#simplest-use-1)
